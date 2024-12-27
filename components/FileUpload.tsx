@@ -6,22 +6,36 @@ import { InfoIcon } from "./icons/InfoIcon"
 import * as motion from "motion/react-client"
 import { useProgress } from "@/hooks/useProgress"
 import { CheckIcon } from "./icons/CheckIcon"
+import { useDispatch, useSelector } from "react-redux"
+import {
+  AppDispatch,
+  RootState,
+  updateProfileState,
+} from "@/context/store/redux-store"
 
 export const FileUpload = ({
   setCurrent,
 }: {
   setCurrent: React.Dispatch<React.SetStateAction<number>>
 }) => {
-  const onFinish = () => {
-    setCurrent(3)
-  }
-  const [imageFile, setImageFile] = useState<Blob>()
   const scope = useRef(null)
   const [progress, playProgress] = useProgress()
 
+  const userProfile = useSelector((state: RootState) => state.userProfile)
+  const dispatch = useDispatch<AppDispatch>()
+  const [isError, setIsError] = useState(false)
+  const onFinish = () => {
+    if (!userProfile?.avatar) {
+      setIsError(true)
+    } else {
+      setCurrent(3)
+    }
+  }
+  const [imageFile, setImageFile] = useState<Blob>()
   useEffect(() => {
     playProgress(0, 100)
   }, [imageFile])
+
   return (
     <div className="max-w-[626px] mx-auto overflow-hidden" ref={scope}>
       <motion.div
@@ -40,7 +54,15 @@ export const FileUpload = ({
             <div className="w-full">
               <FileInput
                 onChange={(e) => {
-                  setImageFile(e.target.files![0])
+                  if (e.target.files![0]) {
+                    setImageFile(e.target.files![0])
+                    dispatch(
+                      updateProfileState({
+                        avatar: URL?.createObjectURL(e.target.files![0]),
+                      })
+                    )
+                    setIsError(false)
+                  }
                 }}
                 accept=".png,.svg,.jpg,.jpeg"
               />
@@ -52,7 +74,7 @@ export const FileUpload = ({
                   <div className="flex items-center gap-3 justify-between flex-wrap">
                     <div className="text-sm font-medium flex gap-3 items-center">
                       <img
-                        src={URL.createObjectURL(imageFile)}
+                        src={URL?.createObjectURL(imageFile)}
                         className="w-[42px] h-[42px] rounded-full object-cover"
                       />
                       <div>
@@ -81,9 +103,19 @@ export const FileUpload = ({
               )}
             </div>
           </div>
-          <Button className="w-full" onClick={onFinish}>
-            Next: Confirmation
-          </Button>
+          <div>
+            {isError && (
+              <div className="flex gap-2 items-center text-sm">
+                <InfoIcon color="#ef4444" />
+                <p className="text-red-500 font-semibold mb-1">
+                  Please upload image
+                </p>
+              </div>
+            )}
+            <Button className="w-full" onClick={onFinish}>
+              Next: Confirmation
+            </Button>
+          </div>
         </div>
       </motion.div>
     </div>

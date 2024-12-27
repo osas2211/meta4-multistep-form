@@ -13,6 +13,7 @@ interface UserProfileState {
   address: string
   allow_email_marketing: boolean
   accept_terms: boolean
+  avatar: string
 }
 
 // Initial State
@@ -29,6 +30,7 @@ const initialState: UserProfileState = {
   address: "",
   allow_email_marketing: false,
   accept_terms: false,
+  avatar: "",
 }
 
 // Store Slice

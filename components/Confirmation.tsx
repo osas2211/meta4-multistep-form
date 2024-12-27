@@ -6,6 +6,8 @@ import { InfoIcon } from "./icons/InfoIcon"
 import { CodeIcon } from "./icons/CodeIcon"
 import { LocationIcon } from "./icons/LocationIcon"
 import { EditUserIcon } from "./icons/EditUserIcon"
+import { useSelector } from "react-redux"
+import { RootState } from "@/context/store/redux-store"
 
 export const Confirmation = ({
   setCurrent,
@@ -15,6 +17,8 @@ export const Confirmation = ({
   const onFinish = () => {
     setCurrent(4)
   }
+  const userProfile = useSelector((state: RootState) => state.userProfile)
+
   return (
     <div className="max-w-[1152px] mx-auto overflow-hidden">
       <motion.div
@@ -33,7 +37,7 @@ export const Confirmation = ({
             <div className="md:grid md:space-y-0 space-y-3 md:grid-cols-2 gap-3 md:gap-5 pb-5 md:pb-8 border-b-[1px] border-b-[#E5E7EB]">
               <div className="col-span-2">
                 <img
-                  src={"/next.svg"}
+                  src={userProfile?.avatar}
                   className="w-[42px] h-[42px] rounded-full object-cover"
                 />
               </div>
@@ -75,7 +79,9 @@ export const Confirmation = ({
                 <p className="font-medium">Profession</p>
                 <div className="flex gap-2 items-center">
                   <CodeIcon />
-                  <p className="">Developer / Bonnie Wilson</p>
+                  <p className="">
+                    {userProfile?.profession} / {userProfile?.profession_title}
+                  </p>
                 </div>
               </div>
               <div>
