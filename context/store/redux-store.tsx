@@ -1,3 +1,4 @@
+"use client"
 import { createSlice, configureStore, PayloadAction } from "@reduxjs/toolkit"
 
 export interface UserProfileState {
@@ -19,7 +20,7 @@ export interface UserProfileState {
 
 // Initial State
 const loadStateFromLocalStorage = (): UserProfileState => {
-  const savedState = localStorage.getItem("userProfile")
+  const savedState = localStorage?.getItem("userProfile")
   return savedState
     ? JSON.parse(savedState)
     : {
@@ -55,7 +56,7 @@ const userProfileSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addDefaultCase((state) => {
-      localStorage.setItem("userProfile", JSON.stringify(state))
+      localStorage?.setItem("userProfile", JSON.stringify(state))
     })
   },
 })
@@ -69,7 +70,7 @@ const store = configureStore({
 
 // Listening to store changes and save to localStorage
 store.subscribe(() => {
-  localStorage.setItem(
+  localStorage?.setItem(
     "userProfile",
     JSON.stringify(store.getState().userProfile)
   )
