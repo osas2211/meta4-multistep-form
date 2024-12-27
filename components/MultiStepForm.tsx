@@ -33,11 +33,11 @@ export const MultiStepForm = () => {
             return (
               <React.Fragment key={index}>
                 <div
-                  className={`flex items-center flex-col gap-[6px] cursor-pointer ${
+                  className={`flex items-center flex-col gap-[6px] ${
                     isActive ? "text-primary" : ""
                   }`}
                   // key={index}
-                  onClick={() => setCurrent(index)}
+                  // onClick={() => setCurrent(index)}
                 >
                   <p>
                     {isPrev ? <BadgeCheckIcon /> : <span>{index + 1}</span>}
