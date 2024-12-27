@@ -88,7 +88,7 @@ export const Confirmation = ({
                 <p className="font-medium">Country</p>
                 <div className="flex gap-2 items-center">
                   <LocationIcon />
-                  <p className="">Developer / {userProfile?.country}</p>
+                  <p className="">{userProfile?.country}</p>
                 </div>
               </div>
               <div>
