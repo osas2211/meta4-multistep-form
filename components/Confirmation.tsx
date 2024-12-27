@@ -30,7 +30,7 @@ export const Confirmation = ({
         </div>
         <div>
           <div className="my-4 md:mb-6">
-            <div className="grid md:grid-cols-2 gap-3 md:gap-5 pb-5 md:pb-8 border-b-[1px] border-b-[#E5E7EB]">
+            <div className="md:grid md:space-y-0 space-y-3 md:grid-cols-2 gap-3 md:gap-5 pb-5 md:pb-8 border-b-[1px] border-b-[#E5E7EB]">
               <div className="col-span-2">
                 <img
                   src={"/next.svg"}

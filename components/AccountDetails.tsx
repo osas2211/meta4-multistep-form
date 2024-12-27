@@ -49,7 +49,7 @@ export const AccountDetails = ({
         </h2>
         <div>
           <div className="my-4 md:mb-6">
-            <div className="grid md:grid-cols-2 gap-3 md:gap-5">
+            <div className="md:grid md:space-y-0 space-y-3 md:grid-cols-2 gap-3 md:gap-5">
               <FormLabel label="Full Name" name="fullname">
                 <Input placeholder="e.g. Bonnie Green" />
               </FormLabel>

@@ -46,7 +46,7 @@ export const MultiStepForm = () => {
                 </div>
                 {index < formHeadings.length - 1 && (
                   <div
-                    className={`md:w-16 w-[6px] h-[1px] ${
+                    className={`md:w-16 w-[8px] h-[1px] ${
                       isPrev ? "bg-primary" : "bg-[#E5E7EB]"
                     }`}
                     // key={`${index}-line`}
