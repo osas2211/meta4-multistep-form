@@ -4,7 +4,7 @@ import React from "react"
 
 interface props
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type"> {
-  label?: string
+  label?: React.ReactNode
   name?: string
 }
 
@@ -34,5 +34,27 @@ export const RadioGroup = ({ children }: { children: React.ReactNode }) => {
         {children}
       </fieldset>
     </form>
+  )
+}
+
+export const Checkbox = ({ ...props }: props) => {
+  return (
+    <div className="grid grid-cols-[16px,auto] gap-2">
+      <input
+        {...props}
+        type="checkbox"
+        className={clsx(
+          "inline-block transition-all border-[1px] border-[#D1D5DB] appearance-none rounded-[2px] h-4 w-4 relative checked:border-primary checked:before:bg-primary before:absolute before:top-[50%] before:left-[50%] before:w-[12px] before:h-[12px] before:bg-transparent before:rounded-[2px] before:translate-x-[-50%] before:translate-y-[-50%]",
+          props.className
+        )}
+        name={props?.name}
+      />
+      <label
+        className="text-sm cursor-pointer inline-block"
+        htmlFor={props?.id}
+      >
+        {props?.label}
+      </label>
+    </div>
   )
 }
