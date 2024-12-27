@@ -100,7 +100,7 @@ export const PersonalInfo = ({
                     onClick={selectProfession}
                     className={`${
                       isActive
-                        ? "border-primary !text-primary bg-[rgba(209,63,0,0.01)]"
+                        ? "!border-primary !text-primary bg-[rgba(209,63,0,0.01)]"
                         : "text-[#6B7280] bg-[#F9FAFB]"
                     }  relative z-[20] rounded-md px-6 py-4 w-full flex items-center justify-between gap-4 hover:border-primary border-[2px] border-transparent transition-all cursor-pointer`}
                   >
