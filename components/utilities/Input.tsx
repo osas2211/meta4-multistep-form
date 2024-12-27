@@ -1,6 +1,7 @@
 "use client"
 import clsx from "clsx"
-import React from "react"
+import React, { ReactNode } from "react"
+import { UploadIcon } from "../icons/UploadIcon"
 
 interface props extends React.InputHTMLAttributes<HTMLInputElement> {}
 interface labelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
@@ -38,6 +39,32 @@ export const FormLabel = ({ ...props }: labelProps) => {
         </div>
       </label>
       <div id={props?.name}>{props.children}</div>
+    </div>
+  )
+}
+
+export const FileInput = ({ ...props }: Omit<props, "type">) => {
+  return (
+    <div>
+      <label
+        htmlFor={props?.id}
+        className="h-[150px] md:h-[200px] border-[2px] border-[#E5E7EB] rounded-lg bg-[#F9FAFB] border-dashed cursor-pointer flex items-center justify-center flex-col text-center"
+      >
+        <UploadIcon />
+        <p className="text-sm text-[#6B7280] mt-2">Drag files here to upload</p>
+        <p className="text-xs text-primary underline">or browse for files</p>
+        <input
+          {...props}
+          type="file"
+          className={clsx(
+            "bg-[#F9FAFB] border-[1px] border-[#D1D5DB] px-4 py-3 rounded-lg text-sm font-medium placeholder:text-[#6B7280] outline-none inline-block w-full focus:border-primary transition-all",
+            props.className
+          )}
+          style={{ display: "none" }}
+          id={props?.id}
+          name={props?.id}
+        />
+      </label>
     </div>
   )
 }

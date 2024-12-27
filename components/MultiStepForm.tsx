@@ -5,6 +5,8 @@ import { BadgeCheckIcon } from "./icons/BadgeCheckIcon"
 import { AccountDetails } from "./AccountDetails"
 import { AnimatePresence } from "motion/react"
 import { FileUpload } from "./FileUpload"
+import { Confirmation } from "./Confirmation"
+import { Finished } from "./Finished"
 
 export const MultiStepForm = () => {
   const [current, setCurrent] = useState(0)
@@ -12,6 +14,8 @@ export const MultiStepForm = () => {
     <PersonalInfo key={0} setCurrent={setCurrent} />,
     <AccountDetails key={1} setCurrent={setCurrent} />,
     <FileUpload key={2} setCurrent={setCurrent} />,
+    <Confirmation key={3} setCurrent={setCurrent} />,
+    <Finished key={4} setCurrent={setCurrent} />,
   ]
   const formHeadings = [
     "Personal Info",

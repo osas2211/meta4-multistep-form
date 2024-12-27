@@ -47,12 +47,13 @@ export const PersonalInfo = ({
   }
 
   return (
-    <div className="max-w-[672px] mx-auto overflow-x-hidden">
+    <div className="max-w-[672px] mx-auto overflow-hidden">
       <motion.div
-        initial={{ x: "-100%", opacity: 0 }}
-        animate={{ x: "0%", opacity: 1 }}
-        exit={{ x: "-100%", opacity: 0 }}
-        transition={{ duration: 0.2, ease: "easeOut" }}
+        initial={{ y: "20px", opacity: 0 }}
+        animate={{ y: "0%", opacity: 1 }}
+        exit={{ y: "20px", opacity: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className=""
         ref={scope}
       >
         <h2 className="md:text-2xl text-lg font-bold md:mb-6 mb-4">
