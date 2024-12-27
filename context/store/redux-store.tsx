@@ -22,7 +22,7 @@ export interface UserProfileState {
 const loadStateFromLocalStorage = (): UserProfileState => {
   if (typeof window === "undefined") {
     return {
-      profession: "Developer",
+      profession: "",
       profession_title: "",
       fullname: "",
       email: "",
