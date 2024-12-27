@@ -73,7 +73,9 @@ const userProfileSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addDefaultCase((state) => {
-      localStorage?.setItem("userProfile", JSON.stringify(state))
+      if (typeof window !== "undefined") {
+        localStorage?.setItem("userProfile", JSON.stringify(state))
+      }
     })
   },
 })
