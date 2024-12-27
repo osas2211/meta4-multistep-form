@@ -20,6 +20,23 @@ export interface UserProfileState {
 
 // Initial State
 const loadStateFromLocalStorage = (): UserProfileState => {
+  if (typeof window === "undefined") {
+    return {
+      profession: "Developer",
+      profession_title: "",
+      fullname: "",
+      email: "",
+      password: "",
+      language: "",
+      phone: "",
+      country: "",
+      biography: "",
+      address: "",
+      allow_email_marketing: false,
+      accept_terms: false,
+      avatar: "",
+    }
+  }
   const savedState = localStorage?.getItem("userProfile")
   return savedState
     ? JSON.parse(savedState)
@@ -62,6 +79,7 @@ const userProfileSlice = createSlice({
 })
 
 // Redux store
+
 const store = configureStore({
   reducer: {
     userProfile: userProfileSlice.reducer,
@@ -69,12 +87,14 @@ const store = configureStore({
 })
 
 // Listening to store changes and save to localStorage
-store.subscribe(() => {
-  localStorage?.setItem(
-    "userProfile",
-    JSON.stringify(store.getState().userProfile)
-  )
-})
+if (typeof window !== "undefined") {
+  store.subscribe(() => {
+    localStorage?.setItem(
+      "userProfile",
+      JSON.stringify(store.getState().userProfile)
+    )
+  })
+}
 
 export default store
 export const { updateProfileState } = userProfileSlice.actions
