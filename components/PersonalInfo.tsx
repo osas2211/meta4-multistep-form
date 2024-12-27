@@ -1,5 +1,5 @@
 "use client"
-import React, { useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { PaletteIcon } from "./icons/PaletteIcon"
 import { ArrowRight } from "./icons/ArrowRight"
 import { CodeIcon } from "./icons/CodeIcon"
@@ -51,13 +51,7 @@ export const PersonalInfo = ({
 
   const userProfile = useSelector((state: RootState) => state.userProfile)
   const dispatch = useDispatch<AppDispatch>()
-  const [selectedProfession, setSelectedProfession] = useState(
-    userProfile?.profession === "Designer"
-      ? 0
-      : userProfile?.profession === "Developer"
-      ? 1
-      : -1
-  )
+  const [selectedProfession, setSelectedProfession] = useState(-1)
 
   const [isError, setIsError] = useState(false)
   const onFinish = () => {
@@ -67,6 +61,16 @@ export const PersonalInfo = ({
       setCurrent(1)
     }
   }
+
+  useEffect(() => {
+    setSelectedProfession(
+      userProfile?.profession === "Designer"
+        ? 0
+        : userProfile?.profession === "Developer"
+        ? 1
+        : -1
+    )
+  }, [])
 
   return (
     <div className="max-w-[672px] mx-auto overflow-hidden">
