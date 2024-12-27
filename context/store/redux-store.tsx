@@ -1,11 +1,12 @@
 import { createSlice, configureStore, PayloadAction } from "@reduxjs/toolkit"
 
-interface UserProfileState {
+export interface UserProfileState {
   profession: "Developer" | "Designer" | ""
   profession_title: string
   fullname: string
   email: string
   password: string
+  confirm_password?: string
   language: string
   phone: string
   country: string
@@ -23,9 +24,9 @@ const initialState: UserProfileState = {
   fullname: "",
   email: "",
   password: "",
-  language: "",
+  language: "English",
   phone: "",
-  country: "",
+  country: "Nigeria",
   biography: "",
   address: "",
   allow_email_marketing: false,

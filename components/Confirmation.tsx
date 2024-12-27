@@ -43,37 +43,35 @@ export const Confirmation = ({
               </div>
               <div>
                 <p className="font-medium">Full name</p>
-                <p className="text-[#6B7280]">Bonnie Wilson</p>
+                <p className="text-[#6B7280]">{userProfile?.fullname}</p>
               </div>
               <div>
                 <p className="font-medium">Email</p>
-                <p className="text-[#6B7280]">Bonnie Wilson</p>
+                <p className="text-[#6B7280]">{userProfile?.email}</p>
               </div>
               <div className="max-w-[526px]">
                 <p className="font-medium">Biography</p>
-                <p className="text-[#6B7280]">
-                  Hello, I'm Helene Engels, USA Designer, Creating things that
-                  stand out, Featured by Adobe, Figma, Webflow and others, Daily
-                  design tips & resources, Exploring Web3.
-                </p>
+                <div
+                  className="text-[#6B7280]"
+                  dangerouslySetInnerHTML={{ __html: userProfile?.biography }}
+                ></div>
               </div>
               <div>
                 <p className="font-medium">Home Address</p>
                 <p className="text-[#6B7280] max-w-[418px]">
-                  92 Miles Drive, Newark, NJ 07103, California, United States of
-                  America
+                  {userProfile?.address}
                 </p>
               </div>
               <div>
                 <p className="font-medium">Country</p>
                 <div className="flex gap-2 items-center">
                   <LocationIcon />
-                  <p className="">Developer / Bonnie Wilson</p>
+                  <p className="">Developer / {userProfile?.country}</p>
                 </div>
               </div>
               <div>
                 <p className="font-medium">Phone number</p>
-                <p className="text-[#6B7280]">Bonnie Wilson</p>
+                <p className="text-[#6B7280]">{userProfile?.phone}</p>
               </div>
               <div>
                 <p className="font-medium">Profession</p>
@@ -86,7 +84,7 @@ export const Confirmation = ({
               </div>
               <div>
                 <p className="font-medium">Language(s)</p>
-                <p className="text-[#6B7280]">Bonnie Wilson</p>
+                <p className="text-[#6B7280]">{userProfile?.language}</p>
               </div>
             </div>
           </div>
