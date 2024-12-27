@@ -8,6 +8,12 @@ import { motion } from "motion/react"
 import { InfoIcon } from "./icons/InfoIcon"
 import { FormLabel, Input } from "./utilities/Input"
 import { Radio, RadioGroup } from "./utilities/Radio"
+import { useDispatch, useSelector } from "react-redux"
+import {
+  AppDispatch,
+  RootState,
+  updateProfileState,
+} from "@/context/store/redux-store"
 
 export const PersonalInfo = ({
   setCurrent,
@@ -15,24 +21,21 @@ export const PersonalInfo = ({
   setCurrent: React.Dispatch<React.SetStateAction<number>>
 }) => {
   const scope: React.Ref<HTMLDivElement> = useRef(null)
-  const onFinish = () => {
-    setCurrent(1)
-  }
 
   const professionOptions = [
     {
       icon: <PaletteIcon />,
       title: "I'm a Designer",
       options: ["UI & UX designer", "Brand designer", "3D designer"],
+      type: "Designer",
     },
     {
       icon: <CodeIcon />,
       title: "I'm a Developer",
       options: ["Front-end developer", "Back-end developer", "Full stack"],
+      type: "Developer",
     },
   ]
-
-  const [selectedProfession, setSelectedProfession] = useState(-1)
 
   const variants = {
     active: {
@@ -44,6 +47,25 @@ export const PersonalInfo = ({
       opacity: 0,
       transition: { duration: 0.2 },
     },
+  }
+
+  const userProfile = useSelector((state: RootState) => state.userProfile)
+  const dispatch = useDispatch<AppDispatch>()
+  const [selectedProfession, setSelectedProfession] = useState(
+    userProfile?.profession === "Designer"
+      ? 0
+      : userProfile?.profession === "Developer"
+      ? 1
+      : -1
+  )
+
+  const [isError, setIsError] = useState(false)
+  const onFinish = () => {
+    if (!userProfile?.profession_title) {
+      setIsError(true)
+    } else {
+      setCurrent(1)
+    }
   }
 
   return (
@@ -115,6 +137,20 @@ export const PersonalInfo = ({
                                 name={`category-${index}`}
                                 id={option}
                                 value={option}
+                                checked={
+                                  option === userProfile.profession_title
+                                }
+                                onChange={(e) => {
+                                  dispatch(
+                                    updateProfileState({
+                                      profession: profession?.type as
+                                        | "Developer"
+                                        | "Designer",
+                                      profession_title: e.target.value,
+                                    })
+                                  )
+                                  setIsError(false)
+                                }}
                               />
                             )
                           })}
@@ -127,9 +163,19 @@ export const PersonalInfo = ({
             })}
           </div>
 
-          <Button className="w-full relative z-[20]" onClick={onFinish}>
-            Next: Account Info
-          </Button>
+          <motion.div className="transition-all">
+            {isError && (
+              <div className="flex gap-2 items-center text-sm">
+                <InfoIcon color="#ef4444" />
+                <p className="text-red-500 font-semibold mb-1">
+                  Please select a profession
+                </p>
+              </div>
+            )}
+            <Button className="w-full relative z-[20]" onClick={onFinish}>
+              Next: Account Info
+            </Button>
+          </motion.div>
         </div>
       </motion.div>
     </div>
