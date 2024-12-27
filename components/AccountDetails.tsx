@@ -243,7 +243,7 @@ export const AccountDetails = ({
                           setFieldValue("accept_terms", e.target.checked)
                         }
                         onBlur={handleBlur}
-                        defaultChecked={userProfile?.accept_terms}
+                        defaultChecked={values?.accept_terms}
                       />
                       <small className="text-xs text-red-500">
                         {errors.accept_terms &&
@@ -268,7 +268,7 @@ export const AccountDetails = ({
                           )
                         }
                         onBlur={handleBlur}
-                        defaultChecked={userProfile?.allow_email_marketing}
+                        defaultChecked={values?.allow_email_marketing}
                       />
                     </div>
                   </div>

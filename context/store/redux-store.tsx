@@ -18,21 +18,28 @@ export interface UserProfileState {
 }
 
 // Initial State
-const initialState: UserProfileState = {
-  profession: "",
-  profession_title: "",
-  fullname: "",
-  email: "",
-  password: "",
-  language: "English",
-  phone: "",
-  country: "Nigeria",
-  biography: "",
-  address: "",
-  allow_email_marketing: false,
-  accept_terms: false,
-  avatar: "",
+const loadStateFromLocalStorage = (): UserProfileState => {
+  const savedState = localStorage.getItem("userProfile")
+  return savedState
+    ? JSON.parse(savedState)
+    : {
+        profession: "",
+        profession_title: "",
+        fullname: "",
+        email: "",
+        password: "",
+        language: "",
+        phone: "",
+        country: "",
+        biography: "",
+        address: "",
+        allow_email_marketing: false,
+        accept_terms: false,
+        avatar: "",
+      }
 }
+
+const initialState: UserProfileState = loadStateFromLocalStorage()
 
 // Store Slice
 const userProfileSlice = createSlice({
@@ -46,6 +53,11 @@ const userProfileSlice = createSlice({
       Object.assign(state, action.payload)
     },
   },
+  extraReducers: (builder) => {
+    builder.addDefaultCase((state) => {
+      localStorage.setItem("userProfile", JSON.stringify(state))
+    })
+  },
 })
 
 // Redux store
@@ -53,6 +65,14 @@ const store = configureStore({
   reducer: {
     userProfile: userProfileSlice.reducer,
   },
+})
+
+// Listening to store changes and save to localStorage
+store.subscribe(() => {
+  localStorage.setItem(
+    "userProfile",
+    JSON.stringify(store.getState().userProfile)
+  )
 })
 
 export default store

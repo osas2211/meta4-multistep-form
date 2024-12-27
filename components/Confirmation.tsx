@@ -6,18 +6,40 @@ import { InfoIcon } from "./icons/InfoIcon"
 import { CodeIcon } from "./icons/CodeIcon"
 import { LocationIcon } from "./icons/LocationIcon"
 import { EditUserIcon } from "./icons/EditUserIcon"
-import { useSelector } from "react-redux"
-import { RootState } from "@/context/store/redux-store"
+import { useDispatch, useSelector } from "react-redux"
+import {
+  AppDispatch,
+  RootState,
+  updateProfileState,
+} from "@/context/store/redux-store"
 
 export const Confirmation = ({
   setCurrent,
 }: {
   setCurrent: React.Dispatch<React.SetStateAction<number>>
 }) => {
+  const userProfile = useSelector((state: RootState) => state.userProfile)
+  const dispatch = useDispatch<AppDispatch>()
   const onFinish = () => {
     setCurrent(4)
+    dispatch(
+      updateProfileState({
+        profession: "",
+        profession_title: "",
+        fullname: "",
+        email: "",
+        password: "",
+        language: "",
+        phone: "",
+        country: "",
+        biography: "",
+        address: "",
+        allow_email_marketing: false,
+        accept_terms: false,
+        avatar: "",
+      })
+    )
   }
-  const userProfile = useSelector((state: RootState) => state.userProfile)
 
   return (
     <div className="max-w-[1152px] mx-auto overflow-hidden">
